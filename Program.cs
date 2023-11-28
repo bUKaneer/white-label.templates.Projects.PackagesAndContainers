@@ -38,7 +38,7 @@ var dockerComposeTemplateFullPath = Path.Combine(config.PortConfigFilePath, "doc
 var dockerComposeTemplateContent = File.ReadAllText(dockerComposeTemplateFullPath);
 
 var dockerComposeContent = dockerComposeTemplateContent
-    .Replace("{project-name}", config.GetProjectNameFrommFolderName())
+    .Replace("{project-name}", config.GetProjectNameFromFolderNameAsKebabCase())
     .Replace("{containers-registry-port}", config.ContainersRegistryPort.ToString())
     .Replace("{containers-ui-port}", config.ContainersUserInterfacePort.ToString())
     .Replace("{packages-port}", config.PackagesUserInterfacePort.ToString());
@@ -50,7 +50,20 @@ var dockerComposeFileExists = File.Exists(dockerComposeFullPath);
 portConfigFileExists = File.Exists(config.GetPortConfigFullPath());
 
 var canStartProcess = portConfigFileExists && dockerComposeFileExists;
-
 if (canStartProcess) new StartService(config.GetPortConfigFullPath());
+
+var nugetConfigTemplateFileFullPath = Path.Combine(config.PortConfigFilePath, "nuget.config.template");
+
+var nugetConfigTemmplateContent = File.ReadAllText(nugetConfigTemplateFileFullPath);
+
+var nugetConfigFileContent = nugetConfigTemmplateContent
+    .Replace("{project-package-source-name}", config.GetProjectNameFromFolderName())
+    .Replace("{project-package-source-ip}", config.PackagesUserInterfacePort.ToString());
+
+var nugetConfigFullPath = Path.Combine(config.PortConfigFilePath, "nuget.config");
+File.WriteAllText(nugetConfigFullPath, nugetConfigFileContent);
+
+
+
 
 

@@ -12,11 +12,16 @@ public record struct PortConfig(
         return Path.Combine(PortConfigFilePath, PortConfigFileName);
     }
 
-    public string GetProjectNameFrommFolderName()
+    public string GetProjectNameFromFolderName()
     {
         var projectName = new DirectoryInfo(PortConfigFilePath).Name;
         return string.IsNullOrWhiteSpace(projectName)
             ? Guid.NewGuid().ToString()
-            : projectName.Replace(".", "-").ToLower();
+            : projectName;
+    }
+
+    public string GetProjectNameFromFolderNameAsKebabCase()
+    {
+        return GetProjectNameFromFolderName().Replace(".", "-").ToLower();
     }
 };

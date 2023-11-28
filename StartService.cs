@@ -12,7 +12,7 @@ public class StartService
 
         var process = new Process();
         process.StartInfo.FileName = @"C:\Program Files\Docker\Docker\resources\bin\docker.exe";
-        process.StartInfo.Arguments = "compose up --no-attach";
+        process.StartInfo.Arguments = "compose up --detach";
         process.StartInfo.CreateNoWindow = false;
         var startResult = process.Start();
         Console.Write(startResult);
