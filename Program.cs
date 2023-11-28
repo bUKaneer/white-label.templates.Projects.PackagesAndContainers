@@ -1,14 +1,16 @@
 ﻿using System.Text.Json;
 
-var containersRegistryPortAsString = Environment.GetCommandLineArgs()[1];
+var projectName = Environment.GetCommandLineArgs()[1];
+
+var containersRegistryPortAsString = Environment.GetCommandLineArgs()[2];
 var containersRegistryPort = 0;
 var validContainerRegistryPort = int.TryParse(containersRegistryPortAsString, out containersRegistryPort);
 
-var containersUserInterfacePortAsString = Environment.GetCommandLineArgs()[2];
+var containersUserInterfacePortAsString = Environment.GetCommandLineArgs()[3];
 var containersUserInterfacePort = 0;
 var validContainerUserInterfacePort = int.TryParse(containersUserInterfacePortAsString, out containersUserInterfacePort);
 
-var packagesUserInterfacePortAsString = Environment.GetCommandLineArgs()[3];
+var packagesUserInterfacePortAsString = Environment.GetCommandLineArgs()[4];
 var packagesUserInterfacePort = 0;
 var validPackagesPort = int.TryParse(packagesUserInterfacePortAsString, out packagesUserInterfacePort);
 
@@ -20,7 +22,9 @@ var portConfigPath = Path.GetFullPath($@".\");
 var portConfigFilename = "ports.config.json";
 
 var config = validPorts
-    ? new PortConfig(portConfigPath,
+    ? new PortConfig(
+        projectName,
+        portConfigPath,
         portConfigFilename,
         containersRegistryPort,
         containersUserInterfacePort,
@@ -57,6 +61,7 @@ var nugetConfigTemplateFileFullPath = Path.Combine(config.PortConfigFilePath, "n
 var nugetConfigTemmplateContent = File.ReadAllText(nugetConfigTemplateFileFullPath);
 
 var nugetConfigFileContent = nugetConfigTemmplateContent
+    .Replace("{project-name}", config.ProjectName)
     .Replace("{project-package-source-name}", config.GetProjectNameFromFolderName())
     .Replace("{project-package-source-ip}", config.PackagesUserInterfacePort.ToString());
 

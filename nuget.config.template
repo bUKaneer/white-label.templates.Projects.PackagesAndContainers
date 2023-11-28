@@ -17,7 +17,7 @@
             <package pattern="*" />
         </packageSource>
         <packageSource key="{project-package-source-name}">
-            <package pattern="{local-source}.*" />
+            <package pattern="{project-name}.*" />
         </packageSource>
     </packageSourceMapping>
 

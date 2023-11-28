@@ -1,5 +1,6 @@
 
 public record struct PortConfig(
+    string ProjectName,
     string PortConfigFilePath,
     string PortConfigFileName = "ports.config.json",
     int ContainersRegistryPort = 19000,
@@ -14,6 +15,8 @@ public record struct PortConfig(
 
     public string GetProjectNameFromFolderName()
     {
+        if (!string.IsNullOrWhiteSpace(ProjectName)) return ProjectName;
+
         var projectName = new DirectoryInfo(PortConfigFilePath).Name;
         return string.IsNullOrWhiteSpace(projectName)
             ? Guid.NewGuid().ToString()
