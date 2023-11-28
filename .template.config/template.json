@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Luke Baughan @bUKaneer",
+  "classifications": ["Web", "ASP.NET", "Clean Architecture"],
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "identity": "WhiteLabel.Projects.PackagesAndContainers.Template",
+  "name": "WhiteLabel Clean Architecture PackagesAndContainers Template",
+  "shortName": "whitelabel-packages-and-containers",
+  "sourceName": "WhiteLabel.Projects.PackagesAndContainers",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            "**/.template.config",
+            "**/*.filelist",
+            "**/*.user",
+            "**/*.lock.json",
+            "**/.git/**",
+            "**/.vs/**",
+            "**/.vscode/**",
+            "**/.idea/**",
+            "**/.nuspec"
+          ]
+        }
+      ]
+    }
+  ]
+}
