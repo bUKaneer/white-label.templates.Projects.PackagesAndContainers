@@ -2,7 +2,7 @@ version: '3.9'
 name: {project-name}
 services:
 
-  registry-ui:
+  {project-name}-registry-ui:
     image: joxit/docker-registry-ui:main
     restart: always
     ports:
@@ -21,7 +21,7 @@ services:
       - CATALOG_ELEMENTS_LIMIT=1000
     container_name: registry-ui
 
-  registry-server:
+  {project-name}-registry-server:
     image: registry:2.8.2
     restart: always
     ports:
@@ -37,7 +37,7 @@ services:
       - ./data/registry:/var/lib/registry
     container_name: registry
 
-  nuget-server:
+  {project-name}-nuget-server:
     image: loicsharma/baget:latest
     restart: always
     ports:
