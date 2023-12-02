@@ -2,7 +2,7 @@ version: '3.9'
 name: {project-name}
 services:
 
-  {project-name}-registry-ui:
+  registry-ui:
     image: joxit/docker-registry-ui:main
     restart: always
     ports:
@@ -19,7 +19,7 @@ services:
       - TAGLIST_PAGE_SIZE=100
       - REGISTRY_SECURED=false
       - CATALOG_ELEMENTS_LIMIT=1000
-    container_name: registry-ui
+    container_name: {project-name}-registry-ui
 
   {project-name}-registry-server:
     image: registry:2.8.2
@@ -35,7 +35,7 @@ services:
       REGISTRY_STORAGE_DELETE_ENABLED: 'true'
     volumes:
       - ./data/registry:/var/lib/registry
-    container_name: registry
+    container_name: {project-name}-registry
 
   {project-name}-nuget-server:
     image: loicsharma/baget:latest
@@ -55,4 +55,4 @@ services:
     volumes:
       - ./data/baget:/var/baget
       - ./data/baget/data-protection-keys:/root/.aspnet/DataProtection-Keys
-    container_name: nuget-ui
+    container_name: {project-name}-nuget-ui
