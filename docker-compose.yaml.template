@@ -2,7 +2,7 @@ version: '3.9'
 name: {project-name}
 services:
 
-  registry-ui:
+  {project-name}-registry-ui:
     image: joxit/docker-registry-ui:main
     restart: always
     ports:
@@ -12,7 +12,7 @@ services:
       - REGISTRY_TITLE=Docker Registry UI
       - DELETE_IMAGES=true
       - SHOW_CONTENT_DIGEST=true
-      - NGINX_PROXY_PASS_URL=http://registry-server:5000
+      - NGINX_PROXY_PASS_URL=http://{project-name}-registry-server:5000
       - SHOW_CATALOG_NB_TAGS=true
       - CATALOG_MIN_BRANCHES=1
       - CATALOG_MAX_BRANCHES=1
